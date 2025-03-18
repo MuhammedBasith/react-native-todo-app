@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App Web Component Demo</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .component-container {
+      height: 600px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+
+  <!-- Preload React Native Web dependencies -->
+  <script>
+    window.process = {
+      env: {
+        NODE_ENV: 'production'
+      }
+    };
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Todo App Web Component</h1>
+    <div class="component-container">
+      <!-- <div id="root"></div> -->
+      <todo-app></todo-app>
+    </div>
+  </div>
+
+  <!-- Import the web component script -->
+  <script type="module" src="./todo-web-component.js"></script>
+
+  <script>
+    // You can interact with the web component programmatically if needed
+    document.addEventListener('DOMContentLoaded', () => {
+      const todoApp = document.querySelector('todo-app');
+      console.log('Todo app component loaded:', todoApp);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Native Todo App - Web Component Demo</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f7;
+    }
+
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px 0;
+      margin-bottom: 30px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+      margin: 0;
+      color: #333;
+      font-size: 28px;
+    }
+
+    .description {
+      color: #666;
+      max-width: 600px;
+      margin: 20px auto;
+      line-height: 1.5;
+    }
+
+    .app-container {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      height: 600px;
+      position: relative;
+    }
+
+    todo-app {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .code-example {
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 30px 0;
+      overflow: auto;
+    }
+
+    code {
+      font-family: monospace;
+      white-space: pre;
+      font-size: 14px;
+    }
+
+    .status {
+      background-color: #e8f5e9;
+      border-radius: 5px;
+      padding: 10px 15px;
+      margin: 10px 0;
+      font-size: 14px;
+      display: none;
+    }
+
+    .error {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+  </style>
+
+  <!-- Register the AppRegistry early to capture the initialization -->
+  <script>
+    // Create a global namespace for the React Native app to use
+    window.ReactNativeWebComponents = {};
+    window.ReactNativeWebComponents.initialized = false;
+  </script>
+</head>
+<body>
+  <div class="page-container">
+    <header>
+      <h1>React Native Todo App as Web Component</h1>
+      <p class="description">
+        This page demonstrates how to use the React Native Todo app as a web component
+        that can be embedded in any website.
+      </p>
+      <div id="status" class="status">Initializing web component...</div>
+    </header>
+
+    <div class="app-container">
+      <div id="root"></div>>
+      <todo-app></todo-app>
+    </div>
+
+    <div class="code-example">
+      <h3>How to use this web component in your own website:</h3>
+      <code>
+&lt;!-- 1. Include the web component script --&gt;
+&lt;script src="path/to/todo-web-component.js"&gt;&lt;/script&gt;
+
+&lt;!-- 2. Add the component to your HTML --&gt;
+&lt;todo-app&gt;&lt;/todo-app&gt;
+      </code>
+    </div>
+  </div>
+
+  <!-- Load the web component script -->
+  <script src="./todo-web-component.js"></script>
+
+  <script>
+    // Add status monitoring
+    const statusEl = document.getElementById('status');
+
+    window.addEventListener('error', function(event) {
+      statusEl.textContent = 'Error: ' + event.message;
+      statusEl.style.display = 'block';
+      statusEl.classList.add('error');
+    });
+
+    // Check component status after loading
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        if (window.ReactNativeWebComponents && window.ReactNativeWebComponents.initialized) {
+          statusEl.textContent = 'Web component loaded successfully!';
+          statusEl.style.display = 'block';
+        }
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
